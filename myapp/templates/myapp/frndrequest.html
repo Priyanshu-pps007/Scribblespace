@@ -1,0 +1,48 @@
+{% extends "base1.html" %}
+{% block content %}
+  
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #main{
+        display: flex;
+        float: right;
+    }
+    #content{
+        padding: 20px;
+    }
+    body{
+        background-color:rgb(97, 149, 148);
+    }
+</style>
+    <div id="imgs" style="background-color:rgb(104, 194, 192,0.8); height: 120px; width: 100%;">
+    <div style="margin-top: 20px;margin-left: 10px;">
+        <div style="display: flex; float: left;">
+    <img src="https://cdn.pixabay.com/photo/2014/02/27/16/10/flowers-276014__340.jpg" alt="image" height="100" width="120px" style="margin-top: 6px;">
+    <h3 style="padding:30px">Username</h3>
+</div>
+    <div id="main">
+        <div id="content">
+        
+        <button style="margin-right: 15px;" onclick="func()">Accept</button>
+        <button onclick="funcs()">Reject</button>
+    </div>
+</div>
+</div>
+</div>
+<script>
+    func=()=>{
+        const idname=document.getElementById('imgs')
+        idname.remove()
+    }
+    funcs=()=>{
+        const idname=document.getElementById('imgs')
+        idname.remove()
+        window.confirm("The request will be rejected click yes to continue")
+    }
+</script>
+
+{% endblock content %}

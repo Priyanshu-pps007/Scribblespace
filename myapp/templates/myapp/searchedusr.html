@@ -1,0 +1,148 @@
+{% extends "base1.html" %}
+{% block content %}
+  <style>
+body {
+  background-color:rgb(97, 149, 148);
+}
+
+.profile-pic {
+    width: 200px;
+    max-height: 200px;
+    display: inline-block;
+}
+
+.file-upload {
+    display: none;
+}
+.circle {
+    border-radius: 100% !important;
+    overflow: hidden;
+    width: 128px;
+    height: 128px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: absolute;
+    top: 72px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.p-image {
+  position: absolute;
+  top: 167px;
+  right: 10px;
+  color: #666666;
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.p-image:hover {
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.upload-button {
+  font-size: 1.2em;
+  color: black;
+}
+
+.upload-button:hover {
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+  color: #999;
+
+  
+
+
+}
+
+.profile-pic-space {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+}
+
+.profile-pic-space img {
+  width: 100%;
+  height: auto;
+}
+  </style>
+<br>
+ {% if searched %}
+   {% for search in searched %}
+     
+   
+
+    <div id="cont" style="display: flex; justify-content: center; align-items: center;">
+      
+        <div class="profile-pic-space">
+          {% if search.image %}
+            <img src="{{search.image.url}}" alt="Your Profile Pic">
+          {% else %}
+          <img src="static/myapp/1077114.png" alt="Your Profile Pic">
+          {% endif %}
+          </div>
+        
+        
+          
+
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100px; ">
+       <div style="padding: 5%;"> 
+        <h5 > Post </h5> 
+             <h6>{{search.post_count}}</h6>
+       </div>
+        <div style="padding: 5%;">
+            <h5>Followers</h5>
+            <h6>{{search.follower_count}}</h6>
+        </div>
+        <div style="padding: 5%;">
+            <h5>Followings</h5>
+            <h6>{{search.following_count}}</h6>
+        </div>
+    </div>
+    
+    <div id="bio" style="display: flex; justify-content: center; align-items: center; height: 100px;margin-top: 3%; ">
+        <div style="width:400px" >
+        <h3 style="text-align: center;">{{search.username}}</h3>
+        
+        <p>{{search.text}}</p>
+        <div style="display: flex; justify-content: center; align-items: center;" >
+          <form method="post" action="send">
+            {% csrf_token %}
+        <button onclick="redir()" style="border-radius: 10px; padding: 2%; cursor: pointer; " type="submit"  >Follow</button>
+      </form>
+    </div>
+    </div>
+    </div>
+    {% endfor %}
+        {% else %}
+        <h1>User not found</h1>
+      {% endif %}
+<script>
+  redir=()=>{
+    alert("Followed successful")
+  }
+    $(document).ready(function() {
+
+    
+var readURL = function(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.profile-pic').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
+$(".file-upload").on('change', function(){
+    readURL(this);
+});
+
+$(".upload-button").on('click', function() {
+   $(".file-upload").click();
+});
+});
+</script>
+{% endblock content %}

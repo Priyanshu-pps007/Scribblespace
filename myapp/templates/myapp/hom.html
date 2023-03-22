@@ -1,0 +1,66 @@
+{% extends "base1.html" %}
+{% block content %}
+  
+<style>
+
+body{
+    background-color: rgb(97, 149, 148);
+}
+
+</style>
+
+
+  
+{% if post %}
+  
+  <div style="margin-top: 3%;">
+    <div class="container">
+      
+    
+        
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {% for a in post %}
+        <div class="col">
+          <div class="card shadow-sm">
+          
+            
+        
+            <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" <img src="https://scontent.flko7-2.fna.fbcdn.net/v/t1.6435-9/120590476_207315990928328_2781334212796110762_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Wiy_D3oPGToAX-kLOrT&_nc_ht=scontent.flko7-2.fna&oh=00_AfDwYgimwon1ZYvQAV5PKECaVAG8NvU42Kius8KKETQl1w&oe=6436E84A"> role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+            <img src="{{a.images.url}}" width="100%" height="225">
+            
+            <div class="card-body">
+              <p class="card-text" style="color: black;">{{a.text}}</p>
+              
+
+              
+              
+              
+              
+              
+              
+              
+            
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" >❤️</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"> 🤢</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- copy from <div class="col"> -->
+          {% endfor %}
+
+        </div>
+        </div>
+        </div>
+{% else %}
+<h1>No post yet </h1> 
+{% endif %}
+      
+    
+      
+      
+{% endblock content %}

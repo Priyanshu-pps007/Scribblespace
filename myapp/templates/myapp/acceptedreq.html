@@ -1,0 +1,140 @@
+{% extends "base1.html" %}
+{% block content %}
+  <style>
+body {
+  background-color:rgb(97, 149, 148);
+}
+
+.profile-pic {
+    width: 200px;
+    max-height: 200px;
+    display: inline-block;
+}
+
+.file-upload {
+    display: none;
+}
+.circle {
+    border-radius: 100% !important;
+    overflow: hidden;
+    width: 128px;
+    height: 128px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: absolute;
+    top: 72px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.p-image {
+  position: absolute;
+  top: 167px;
+  right: 10px;
+  color: #666666;
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.p-image:hover {
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+.upload-button {
+  font-size: 1.2em;
+  color: black;
+}
+
+.upload-button:hover {
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+  color: #999;
+
+  
+
+
+}
+
+.profile-pic-space {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+}
+
+.profile-pic-space img {
+  width: 100%;
+  height: auto;
+}
+  </style>
+<br>
+    {% for s in searched %}
+
+    <div id="cont" style="display: flex; justify-content: center; align-items: center;">
+        
+        <div class="profile-pic-space">
+            {% if s.image %}
+            <img src="{{s.image.url}}" alt="Your Profile Pic">
+            {% else %}
+            <img src="static/myapp/1077114.png" height="85px" width="125px" alt="Your Profile Pic">
+            {% endif %}
+          </div>
+         
+
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100px; ">
+        
+       <div style="padding: 5%;"> 
+        <h5 > Post</h5> 
+             <h6>{{s.post_count}}</h6>
+       </div>
+        <div style="padding: 5%;">
+            <h5>Follower</h5>
+            <h6>{{s.follower_count}}</h6>
+        </div>
+        <div style="padding: 5%;">
+            <h5>Following</h5>
+            <h6>{{s.following_count}}</h6>
+        </div>
+    </div>
+    <div id="bio" style="display: flex; justify-content: center; align-items: center; height: 100px;margin-top: 3%; ">
+        <div style="width:400px" >
+        <h3 style="text-align: center;">{{s.username}}</h3>
+        <p>{{s.text}}</p>
+        <div style="display: flex; justify-content: center; align-items: center;" >
+          <form method="post" action="viewpost">
+            {% csrf_token %}
+        <button style="border-radius: 10px; width: 85px; margin-right: 3%; padding: 2%; cursor: pointer; " type="submit">View post</button>
+      </form>
+      <form method="post" action="unfollow">
+        {% csrf_token %}
+        <button style="border-radius: 10px; padding: 2%; cursor: pointer; margin-left: 4%; ">Unfollow</button>
+      </form>
+    </div>
+    </div>
+    </div>
+    {% endfor %}
+<script>
+    $(document).ready(function() {
+
+    
+var readURL = function(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.profile-pic').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
+$(".file-upload").on('change', function(){
+    readURL(this);
+});
+
+$(".upload-button").on('click', function() {
+   $(".file-upload").click();
+});
+});
+</script>
+{% endblock content %}
